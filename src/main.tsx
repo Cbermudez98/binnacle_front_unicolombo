@@ -8,11 +8,16 @@ import {
 } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import Login from './pages/Login/Login.tsx';
+import App from './App.tsx';
 
 const routes = createBrowserRouter([
   {
     path: "/",
     element: <Login/>
+  },
+  {
+    path: "/index",
+    element: <App/>
   }
 ]);
 

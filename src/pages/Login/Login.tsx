@@ -4,14 +4,20 @@ import InputComponent from "../../components/Input/Input";
 import { useState } from "react";
 import Constants from "../../utils/constants";
 import showToast from "../../utils/toast";
-import { post } from "../../utils/axios";
-
+import AxiosRequest, { IRequestAxios } from "../../utils/axios";
+import { setStorage } from "../../utils/localStorage";
+import { useNavigate } from "react-router-dom";
 interface ILogin {
     email: string;
     password: string;
 }
 
+interface ILoginResponse {
+    token: string;
+}
+
 const Login = () => {
+    const navigate = useNavigate();
     const [form, setForm] = useState<ILogin>({
         email: "",
         password: ""
@@ -22,7 +28,6 @@ const Login = () => {
             ...form,
             [label]: value
         } as unknown as ILogin);
-        console.log(form);
     };
 
     const onSubmitLoginHandler = async () => {
@@ -36,14 +41,20 @@ const Login = () => {
                 break;
             }
         }
-        console.log(error, errorMsg);
         if(error) return showToast({ message: errorMsg, type: "error" });
         try {
             const url = `${Constants.BACKEND_URL}users/login`;
-            const response = await post(url, form);
-            console.log(response);
+            const request: IRequestAxios = {
+                method: "POST",
+                url,
+                data: form
+            }; 
+            const { data } = await AxiosRequest<ILoginResponse>(request);
+            setStorage("Token", JSON.stringify(data));
+            showToast({ type: "success", message: "Login with success" });
+            navigate("/index");
         } catch (error) {
-            console.log(error);
+            showToast({ type: "error", message: "Error in login" });
         }
     };
 

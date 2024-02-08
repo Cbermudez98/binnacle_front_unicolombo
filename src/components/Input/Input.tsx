@@ -15,7 +15,6 @@ const InputComponent = ({ id, label, type, setContext, required = false}: IInput
 
     const onInputHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
         const value = (e.target as HTMLInputElement).value;
-        console.log(value);
         setContext(id, value);
     };
 

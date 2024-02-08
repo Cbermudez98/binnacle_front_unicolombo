@@ -1,30 +1,24 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import axios from "axios";
+import axios, { Method } from "axios";
 
-const get = (url: string) => {
-    return new Promise((resolve, reject) => {
-        axios({
-            method: "GET",
-            url,
-            validateStatus: () => true,
-        }).then(({ data }) => resolve(data))
-        .catch((data) => reject(data));
-    });
-};
+export interface IRequestAxios {
+    method: Method,
+    url: string,
+    data?: Record<string, any>
+}
 
-
-const post = (url: string, object: Record<string, any>) => {
-    return new Promise((resolve, reject) => {
-        axios({
-            method: "POST",
-            url,
-            data: object
-        }).then(({ data }) => resolve(data))
-        .catch((error) => {
-            console.log(error.toJSON());
-            reject(error);
+const AxiosRequest = async <T>(request: IRequestAxios) => {
+    try {
+        const { data, status } = await axios({
+            url: request.url,
+            method: request.method,
+            data: request?.data || {}
         });
-    });
-};
+        return { data: data.data as T, status };
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
 
-export { get, post };
+export default AxiosRequest;
