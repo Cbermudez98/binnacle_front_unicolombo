@@ -1,7 +1,7 @@
-import './App.css';
+import './Index.css';
 import { Container } from 'react-bootstrap';
 
-function App() {
+const Index = () => {
 
   return (
     <Container>
@@ -10,4 +10,4 @@ function App() {
   )
 }
 
-export default App
+export default Index
