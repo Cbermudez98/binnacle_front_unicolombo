@@ -1,5 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import axios, { Method } from "axios";
+import axios, { InternalAxiosRequestConfig, Method } from "axios";
+import { getStorage } from "./localStorage";
+
+axios.interceptors.request.use((config: InternalAxiosRequestConfig<any>) => {
+    const token = getStorage("Token");
+    if (token) config.headers.Authorization = `Bearer ${token.token}`;
+    return config;
+});
 
 export interface IRequestAxios {
     method: Method,

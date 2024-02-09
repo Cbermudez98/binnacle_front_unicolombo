@@ -6,7 +6,9 @@ import Constants from "../../utils/constants";
 import showToast from "../../utils/toast";
 import AxiosRequest, { IRequestAxios } from "../../utils/axios";
 import { setStorage } from "../../utils/localStorage";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import axios from "axios";
+import { HttpStatusCode } from "../../utils/httpStatusCode";
 interface ILogin {
     email: string;
     password: string;
@@ -54,7 +56,15 @@ const Login = () => {
             showToast({ type: "success", message: "Login with success" });
             navigate("/index");
         } catch (error) {
-            showToast({ type: "error", message: "Error in login" });
+            if(axios.isAxiosError(error)) {
+                if(error.response?.status === HttpStatusCode.INTERNAL_SERVER_ERROR) {
+                    showToast({ type: "error", "message": "Error in login" })
+                } else {
+                    showToast({ type: "error", "message": error.response?.data.error })
+                }
+            } else {
+                showToast({ type: "error", message: "Error in login" });
+            }
         }
     };
 
@@ -69,6 +79,9 @@ const Login = () => {
                 <Col md="4">
                     <InputComponent label="Password" id="password" type="password" required={true} setContext={onTypeHandler} />
                 </Col>
+            </Row>
+            <Row>
+                <Link to={"/register"}>Create an account</Link>
             </Row>
             <Row style={{ "marginTop": "10px" }}>
                 <Col md="4">
