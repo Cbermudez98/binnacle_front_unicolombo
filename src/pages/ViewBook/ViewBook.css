@@ -1,0 +1,24 @@
+/* Sticky toolbar */
+.pdf-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* Ensure it's above other content */
+    background-color: white; /* Customize as needed */
+  }
+  
+  /* Sticky sidebar */
+  .pdf-sidebar {
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* Ensure it's above other content */
+    background-color: white; /* Customize as needed */
+  }
+  
+  /* Adjust for sidebar collapse button */
+  .pdf-sidebar-collapse-button {
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* Ensure it's above other content */
+    background-color: white; /* Customize as needed */
+  }
+  

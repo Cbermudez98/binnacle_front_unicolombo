@@ -13,6 +13,7 @@ import Login from './pages/Login/Login.tsx';
 const Index = lazy(() => import("./pages/Index/Index.tsx"));
 const Guard = lazy(() => import("./Guard/Guard.tsx"));
 const Register = lazy(async () => await import("./pages/Register/Register.tsx"));
+const ViewBook = lazy(async () => await import("./pages/ViewBook/ViewBook.tsx"));
 
 const routes: RouteObject[] = [
   {
@@ -26,6 +27,10 @@ const routes: RouteObject[] = [
   {
     path: "/register",
     element: <Suspense><Register/></Suspense>
+  },
+  {
+    path: "/view/:id",
+    element: <Suspense><ViewBook/></Suspense>
   }
 ];
 
