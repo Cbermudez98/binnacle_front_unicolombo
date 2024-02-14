@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Worker, Viewer, SpecialZoomLevel } from '@react-pdf-viewer/core';
-import type { ToolbarSlot, TransformToolbarSlot } from '@react-pdf-viewer/toolbar';
-import { toolbarPlugin } from '@react-pdf-viewer/toolbar';
+// import type { ToolbarSlot, TransformToolbarSlot } from '@react-pdf-viewer/toolbar';
+// import { toolbarPlugin } from '@react-pdf-viewer/toolbar';
 import '@react-pdf-viewer/core/lib/styles/index.css';
 import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout';
 import '@react-pdf-viewer/default-layout/lib/styles/index.css';
